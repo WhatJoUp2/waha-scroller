@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  color: #fff;
+  font-family: "MinionPro-Regular", Inter, Avenir, Helvetica, Arial, sans-serif;
+  background-image: linear-gradient(to bottom, #020917, #101725);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.content {
+  display: flex;
+  min-height: 100vh;
+  line-height: 1.1;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.smallcaps {
+  font-variant: small-caps;
+}
+
+@font-face {
+  font-family: "MinionPro-Regular";
+  src: url("./assets/fonts/MinionPro-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MinionPro-Regular";
+  src: url("./assets/fonts/MinionPro-Semibold.otf") format("opentype");
+  font-weight: bold;
+  font-style: bold;
+}
+
+@font-face {
+  font-family: "MinionPro-Regular";
+  src: url("./assets/fonts/MinionPro-It.otf") format("opentype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+:root {
+  --ability-black: #333;
+  --ability-yellow: #b8860b;
+  --ability-grey: #808080;
+  --ability-blue: #00008b;
+  --ability-orange: #a36303;
+  --ability-red: #8b0000;
+  --ability-purple: #4b0082;
+  --ability-green: #006400;
+
+  --ability-black-filter: brightness(0) saturate(100%) invert(18%) sepia(0%)
+    saturate(0%) hue-rotate(259deg) brightness(107%) contrast(96%);
+  --ability-yellow-filter: brightness(0) saturate(100%) invert(48%) sepia(86%)
+    saturate(1352%) hue-rotate(18deg) brightness(93%) contrast(91%);
+  --ability-grey-filter: brightness(0) saturate(100%) invert(56%) sepia(0%)
+    saturate(1795%) hue-rotate(252deg) brightness(89%) contrast(94%);
+  --ability-blue-filter: brightness(0) saturate(100%) invert(12%) sepia(87%)
+    saturate(3773%) hue-rotate(239deg) brightness(73%) contrast(136%);
+  --ability-orange-filter: brightness(0) saturate(100%) invert(33%) sepia(82%)
+    saturate(2067%) hue-rotate(29deg) brightness(90%) contrast(98%);
+  --ability-red-filter: brightness(0) saturate(100%) invert(12%) sepia(50%)
+    saturate(7489%) hue-rotate(22deg) brightness(83%) contrast(132%);
+  --ability-purple-filter: brightness(0) saturate(100%) invert(14%) sepia(76%)
+    saturate(4961%) hue-rotate(273deg) brightness(60%) contrast(117%);
+  --ability-green-filter: brightness(0) saturate(100%) invert(23%) sepia(62%)
+    saturate(2200%) hue-rotate(94deg) brightness(91%) contrast(105%);
+}

@@ -1,0 +1,288 @@
+.ws-background {
+  background: #f0e5c6;
+  background-image: url("/src/assets/images/textured-paper.png");
+  color: black;
+  width: 1000px;
+  height: 1400px;
+  padding: 50px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.ws-header {
+  color: white;
+  text-shadow: 3px 3px 3px #0008;
+  font-weight: bold;
+  display: flex;
+}
+
+.ws-header-container {
+  margin: 30px 0;
+  position: absolute;
+  width: 800px;
+  left: 150px;
+  height: 140px;
+  text-transform: uppercase;
+}
+
+.ws-header-title {
+  display: flex;
+}
+
+.ws-header-title-side {
+  padding: 0 10px;
+  font-size: 20px;
+  text-transform: none;
+  font-weight: normal;
+  font-style: italic;
+  font-variant: small-caps;
+}
+
+.ws-header-point {
+  font-size: 30px;
+  font-variant: normal;
+}
+
+.ws-header-title-mid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.ws-header-name {
+  font-size: 50px;
+}
+
+.ws-char-wrapper {
+  background: url("/src/assets/images/AoS4_profile1.webp");
+  height: 200px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  font-size: 40px;
+  color: white;
+  z-index: 1;
+}
+
+.ws-char-wrapper div {
+  height: 40px;
+}
+
+.ws-char-wrapper-top {
+  margin-top: 40px;
+}
+
+.ws-char-wrapper-mid {
+  display: flex;
+}
+
+.ws-char-wrapper-mid-left {
+  flex: 1;
+  text-align: right;
+  margin-right: 40px;
+}
+
+.ws-char-wrapper-mid-right {
+  flex: 1;
+  text-align: left;
+}
+
+.ws-attacks {
+  font-size: 20px;
+  border-collapse: collapse;
+  border-bottom: 2px solid var(--faction-main-color);
+  margin-top: 20px;
+}
+
+.ws-attacks th,
+.ws-attacks td {
+  padding: 5px;
+}
+
+.ws-attacks tr th:first-child {
+  width: 300px;
+}
+
+.ws-attacks .mid {
+  width: 40px;
+}
+
+.ws-attacks tr {
+  background-color: #fff;
+}
+
+.ws-attacks .ws-attacks-weapon:nth-child(odd) {
+  background-color: #ddd;
+}
+
+.ws-attacks th {
+  background-color: var(--faction-main-color);
+  color: white;
+  font-weight: bold;
+}
+
+.ws-attacks td {
+  border-right: 1px solid var(--faction-main-color);
+}
+
+.ws-attacks tr td:last-child {
+  border-right: none;
+}
+
+.ws-abilities {
+  flex: 1;
+  flex-wrap: wrap;
+  column-count: 2;
+  column-gap: 16px;
+  margin-top: 20px;
+}
+
+.ws-ability-wrapper {
+  break-inside: avoid;
+}
+
+.ws-ability-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border: 2px solid black;
+  border-top: none;
+  font-size: 20px;
+  background-color: #fff;
+  position: relative;
+  margin: 0 10px 20px;
+}
+
+.ws-ability-timing-torn {
+  width: 442px;
+  left: -12px;
+  position: absolute;
+}
+
+.ws-ability-timing {
+  color: #fff;
+  padding: 3px 5px;
+  font-weight: bold;
+  display: flex;
+}
+
+.ws-ability-timing > img {
+  height: 20px;
+  margin-right: 5px;
+}
+
+.ws-ability-body {
+  padding: 10px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ws-ability-body > div:not(:first-child) {
+  margin-top: 10px;
+}
+
+.ws-ability-name {
+  font-variant: small-caps;
+}
+
+.ws-ability-keywords-container {
+  display: flex;
+  border-top: 2px solid #000;
+  font-weight: bold;
+}
+
+.ws-ability-keywords-container > div {
+  padding: 5px 10px;
+}
+
+.ws-ability-keywords-title {
+  color: white;
+  font-variant: small-caps;
+}
+
+.ws-keywords-container {
+  border-collapse: collapse;
+  border: 2px solid var(--faction-main-color);
+  background-color: #fff;
+  font-size: 20px;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+
+.ws-keywords-container th {
+  background-color: var(--faction-main-color);
+  color: #fff;
+}
+
+.ws-keywords-container td {
+  border: 2px solid var(--faction-main-color);
+}
+
+.black {
+  background-color: var(--ability-black);
+}
+
+.black-border {
+  border-color: var(--ability-black);
+}
+
+.yellow {
+  background-color: var(--ability-yellow);
+}
+
+.yellow-border {
+  border-color: var(--ability-yellow);
+}
+
+.grey {
+  background-color: var(--ability-grey);
+}
+
+.grey-border {
+  border-color: var(--ability-grey);
+}
+
+.blue {
+  background-color: var(--ability-blue);
+}
+
+.blue-border {
+  border-color: var(--ability-blue);
+}
+
+.orange {
+  background-color: var(--ability-orange);
+}
+
+.orange-border {
+  border-color: var(--ability-orange);
+}
+
+.red {
+  background-color: var(--ability-red);
+}
+
+.red-border {
+  border-color: var(--ability-red);
+}
+
+.purple {
+  background-color: var(--ability-purple);
+}
+
+.purple-border {
+  border-color: var(--ability-purple);
+}
+
+.green {
+  background-color: var(--ability-green);
+}
+
+.green-border {
+  border-color: var(--ability-green);
+}

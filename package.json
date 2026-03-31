@@ -1,0 +1,26 @@
+{
+  "name": "waha-scroller",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rsbuild build",
+    "dev": "rsbuild dev --open",
+    "preview": "rsbuild preview"
+  },
+  "dependencies": {
+    "hex-to-css-filter": "^6.0.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "sanitize-html": "^2.17.2"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.7.1",
+    "@rsbuild/plugin-react": "^1.4.2",
+    "@types/node": "^25.3.3",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@types/sanitize-html": "^2.16.1",
+    "typescript": "^5.9.3"
+  }
+}

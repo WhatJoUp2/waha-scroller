@@ -1,0 +1,93 @@
+.tornedge-container {
+  border-collapse: collapse;
+}
+
+.tornedge-container td {
+  filter: var(--faction-main-color-filter);
+}
+
+.tornedge-container.black-filter td {
+  filter: var(--ability-black-filter);
+}
+
+.tornedge-container.yellow-filter td {
+  filter: var(--ability-yellow-filter);
+}
+
+.tornedge-container.grey-filter td {
+  filter: var(--ability-grey-filter);
+}
+
+.tornedge-container.blue-filter td {
+  filter: var(--ability-blue-filter);
+}
+
+.tornedge-container.orange-filter td {
+  filter: var(--ability-orange-filter);
+}
+
+.tornedge-container.red-filter td {
+  filter: var(--ability-red-filter);
+}
+
+.tornedge-container.purple-filter td {
+  filter: var(--ability-purple-filter);
+}
+
+.tornedge-container.green-filter td {
+  filter: var(--ability-green-filter);
+}
+
+.tornedge-content {
+  background-color: var(--faction-main-color);
+  filter: none !important;
+}
+
+.tornedge-container td {
+  margin: 0;
+  padding: 0;
+}
+
+.tornedge1 {
+  background-image: url("../../assets/images/Corner22_1f.png");
+  height: 10px;
+  width: 10px;
+}
+
+.tornedge2 {
+  background-image: url("../../assets/images/Corner22_2f.png");
+  height: 10px;
+}
+
+.tornedge3 {
+  background-image: url("../../assets/images/Corner22_3f.png");
+  height: 10px;
+  width: 10px;
+}
+
+.tornedge4 {
+  background-image: url("../../assets/images/Corner22_4f.png");
+  width: 10px;
+}
+
+.tornedge5 {
+  background-image: url("../../assets/images/Corner22_5f.png");
+  height: 10px;
+  width: 10px;
+}
+
+.tornedge6 {
+  background-image: url("../../assets/images/Corner22_6f.png");
+  height: 10px;
+}
+
+.tornedge7 {
+  background-image: url("../../assets/images/Corner22_7f.png");
+  height: 10px;
+  width: 10px;
+}
+
+.tornedge8 {
+  background-image: url("../../assets/images/Corner22_8f.png");
+  width: 10px;
+}
