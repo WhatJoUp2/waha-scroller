@@ -24,6 +24,11 @@
   dependencies:
     tslib "^2.4.0"
 
+"@jpinsonneau/html-to-image@^1.11.13":
+  version "1.11.13"
+  resolved "https://registry.yarnpkg.com/@jpinsonneau/html-to-image/-/html-to-image-1.11.13.tgz#d5cb335bc2775d61ca27f93c25f9298ea9362073"
+  integrity sha512-SfxGKL5MuUbTNO9aU7TGBsI9Fm68fXlF+TqqD75LAfO5FN//Fe46+rzKxIVZPUzi7NEKGJO3O1jBeua2Cd2Cbg==
+
 "@module-federation/error-codes@0.22.0":
   version "0.22.0"
   resolved "https://registry.npmjs.org/@module-federation/error-codes/-/error-codes-0.22.0.tgz"

@@ -38,6 +38,7 @@
   font-weight: normal;
   font-style: italic;
   font-variant: small-caps;
+  width: 80px;
 }
 
 .ws-header-point {
@@ -153,14 +154,12 @@
   border-top: none;
   font-size: 20px;
   background-color: #fff;
-  position: relative;
   margin: 0 10px 20px;
 }
 
 .ws-ability-timing-torn {
   width: 442px;
-  left: -12px;
-  position: absolute;
+  margin-left: -12px;
 }
 
 .ws-ability-timing {
@@ -177,7 +176,6 @@
 
 .ws-ability-body {
   padding: 10px;
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
 }

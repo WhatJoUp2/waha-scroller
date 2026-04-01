@@ -18,7 +18,7 @@ export const AbilityBox: FC<AbilityBoxProps> = ({ ability }) => {
         >
           <div className={"ws-ability-timing " + ability.color}>
             <img src={getAbilityTypeImage(ability.typeAttribute)} />
-            {ability.timing}
+            <ParseMarkdown markdown={ability.timing} />
           </div>
         </TornEdgeContainer>
         <div className="ws-ability-body">

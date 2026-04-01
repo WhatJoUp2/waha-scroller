@@ -24,7 +24,7 @@ export function getNameAndSubtitle(name: string): string[] {
   const VALID_SEPARATORS = [",", " with ", " on ", "("];
   let separator = "";
   VALID_SEPARATORS.forEach((s) => {
-    if (name.includes(s)) separator = s;
+    if (name.includes(s) && separator === "") separator = s;
   });
 
   if (separator === "") return [name, ""];

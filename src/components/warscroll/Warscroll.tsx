@@ -1,4 +1,4 @@
-import { useMemo, type FC } from "react";
+import { useMemo, type FC, type RefObject } from "react";
 import type { Unit } from "../../db/aosDB.types";
 import "./Warscroll.css";
 import { Attacks } from "./Attacks";
@@ -11,13 +11,14 @@ import { Keywords } from "./Keywords";
 export interface WarscrollProps {
   army: string;
   unit: Unit;
+  ref: RefObject<HTMLDivElement | null>;
 }
 
-export const Warscroll: FC<WarscrollProps> = ({ unit, army }) => {
+export const Warscroll: FC<WarscrollProps> = ({ unit, army, ref }) => {
   const nameAndSubtitle = useMemo(() => getNameAndSubtitle(unit.name), [unit]);
 
   return (
-    <div className="ws-background">
+    <div className="ws-background" ref={ref}>
       <div className="ws-header">
         <Characteristics unit={unit} />
         <TornEdgeContainer className="ws-header-container">

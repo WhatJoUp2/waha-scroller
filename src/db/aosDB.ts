@@ -3,12 +3,17 @@ import type { DB, Unit } from "./aosDB.types";
 
 const db: DB = dbJson as any;
 
-export function getByPath() {
-  return db.units[0];
+export function getArmyNames(): string[] {
+  const keys = Object.keys(db.armies);
+  const ret: string[] = [];
+  keys.forEach((k) => {
+    if (!db.armies[k].isArmyOfRenown) ret.push(k);
+  });
+  return ret;
 }
 
-export function getUnits(): Unit[] {
-  return (dbJson as DB).units;
+export function getUnitNamesFromArmy(army: string) {
+  return db.armies[army].units.map((u) => u.name);
 }
 
 function getUnitsFromArmy(army: string): Unit[] {

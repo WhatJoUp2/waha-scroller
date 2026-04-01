@@ -1,15 +1,33 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import { Warscroll } from "./components/warscroll/Warscroll";
-import { getUnitFromArmy } from "./db/aosDB";
+import {
+  getArmyNames,
+  getUnitFromArmy,
+  getUnitNamesFromArmy,
+} from "./db/aosDB";
 import { hexToCSSFilter } from "hex-to-css-filter";
+import { toPng } from "@jpinsonneau/html-to-image";
+import type { Unit } from "./db/aosDB.types";
+import { Controller } from "./components/controller/Controller";
 
 const App = () => {
-  const ARMY = "Helsmiths of Hashut";
-  const UNIT_NAME = "Daemonsmith on Infernal Taurus";
-  const unit = getUnitFromArmy(ARMY, UNIT_NAME);
+  // const ARMY = "Helsmiths of Hashut";
+  // const UNIT_NAME = "Daemonsmith on Infernal Taurus";
+  const [army, setArmy] = useState("");
+  const [unitName, setUnitName] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
 
-  console.log(unit);
+  const unit: Unit | null = useMemo(
+    () =>
+      army !== "" && unitName !== "" ? getUnitFromArmy(army, unitName) : null,
+    [army, unitName],
+  );
+  const armyList = useMemo(() => getArmyNames(), []);
+  const unitList = useMemo(
+    () => (army !== "" ? getUnitNamesFromArmy(army) : []),
+    [army],
+  );
 
   useEffect(() => {
     const r: any = document.querySelector(":root");
@@ -21,9 +39,49 @@ const App = () => {
     );
   }, []);
 
+  useEffect(() => {
+    if (army === "" && armyList.length > 0) setArmy(armyList[0]);
+  }, [army, armyList]);
+
+  useEffect(() => {
+    if (unitName === "" && unitList.length > 0) setUnitName(unitList[0]);
+  }, [unitName, unitList]);
+
+  const onDownloadImage = () => {
+    if (ref.current) {
+      toPng(ref.current).then((data) => {
+        const link = document.createElement("a");
+        link.href = data;
+        link.download = unitName + ".png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        // window.open(data);
+      });
+    }
+  };
+
+  const handleArmyChange = (value: string) => {
+    setArmy(value);
+    setUnitName("");
+  };
+
   return (
     <div className="content">
-      {unit && <Warscroll army={ARMY} unit={unit} />}
+      <div className="controller">
+        <Controller
+          army={army}
+          armyList={armyList}
+          onArmyChange={handleArmyChange}
+          onDownloadImage={onDownloadImage}
+          onUnitNameChange={(value) => setUnitName(value)}
+          unitList={unitList}
+          unitName={unitName}
+        />
+      </div>
+      <div className="warscroll-container">
+        {unit && <Warscroll army={army} unit={unit} ref={ref} />}
+      </div>
     </div>
   );
 };
