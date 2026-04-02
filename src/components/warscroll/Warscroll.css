@@ -11,6 +11,8 @@
   flex-direction: column;
 }
 
+/* HEADER */
+
 .ws-header {
   color: white;
   text-shadow: 3px 3px 3px #0008;
@@ -58,6 +60,8 @@
   font-size: 50px;
 }
 
+/* CHARACTERISTICS */
+
 .ws-char-wrapper {
   background: url("/src/assets/images/AoS4_profile1.webp");
   height: 200px;
@@ -67,6 +71,18 @@
   font-size: 40px;
   color: white;
   z-index: 1;
+  position: relative;
+}
+
+.ws-char-wrapper.ward {
+  background: url("/src/assets/images/AoS4_profile_with_FNP1.png");
+}
+
+.ws-char-ward {
+  position: absolute;
+  left: 166px;
+  top: 18px;
+  font-size: 26px;
 }
 
 .ws-char-wrapper div {
@@ -91,6 +107,8 @@
   flex: 1;
   text-align: left;
 }
+
+/* ATTACKS */
 
 .ws-attacks {
   font-size: 20px;
@@ -134,6 +152,8 @@
   border-right: none;
 }
 
+/* ABLITIES */
+
 .ws-abilities {
   flex: 1;
   flex-wrap: wrap;
@@ -144,6 +164,9 @@
 
 .ws-ability-wrapper {
   break-inside: avoid;
+  margin: 0 10px 20px;
+  position: relative;
+  padding-top: 15px;
 }
 
 .ws-ability-container {
@@ -154,7 +177,6 @@
   border-top: none;
   font-size: 20px;
   background-color: #fff;
-  margin: 0 10px 20px;
 }
 
 .ws-ability-timing-torn {
@@ -164,6 +186,7 @@
 
 .ws-ability-timing {
   color: #fff;
+  font-size: 19px;
   padding: 3px 5px;
   font-weight: bold;
   display: flex;
@@ -172,6 +195,34 @@
 .ws-ability-timing > img {
   height: 20px;
   margin-right: 5px;
+}
+
+.ws-cost {
+  position: absolute;
+  background-image: url("/src/assets/images/abCommandPoints1.png");
+  height: 56px;
+  width: 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 34px;
+  left: 398px;
+  top: 2px;
+}
+
+.ws-cost.spell {
+  background-image: url("/src/assets/images/abSpellPoints1.png");
+  color: white;
+  left: 384px;
+  width: 57px;
+}
+
+.ws-cost.prayer {
+  background-image: url("/src/assets/images/abPrayerPoints.png");
+  color: white;
+  left: 394px;
+  width: 54px;
 }
 
 .ws-ability-body {
@@ -203,6 +254,8 @@
   font-variant: small-caps;
 }
 
+/* KEYWORDS */
+
 .ws-keywords-container {
   border-collapse: collapse;
   border: 2px solid var(--faction-main-color);
@@ -221,6 +274,8 @@
   border: 2px solid var(--faction-main-color);
 }
 
+/* COLORS */
+
 .black {
   background-color: var(--ability-black);
 }
@@ -237,12 +292,12 @@
   border-color: var(--ability-yellow);
 }
 
-.grey {
-  background-color: var(--ability-grey);
+.gray {
+  background-color: var(--ability-gray);
 }
 
-.grey-border {
-  border-color: var(--ability-grey);
+.gray-border {
+  border-color: var(--ability-gray);
 }
 
 .blue {

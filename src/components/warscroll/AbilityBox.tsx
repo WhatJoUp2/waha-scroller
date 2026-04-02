@@ -1,14 +1,19 @@
-import type { FC } from "react";
+import { useMemo, type FC } from "react";
 import type { Ability } from "../../db/aosDB.types";
 import { ParseMarkdown } from "../parseMarkdown/ParseMarkdown";
 import { getAbilityTypeImage } from "../../assets/images/abilityTypes";
 import { TornEdgeContainer } from "../tornEdgeContainer/TornEdgeContainer";
+import { getCostTypeFromKeywords } from "../../utils/utils";
 
 export interface AbilityBoxProps {
   ability: Ability;
 }
 
 export const AbilityBox: FC<AbilityBoxProps> = ({ ability }) => {
+  const costType = useMemo(
+    () => (ability.cost ? getCostTypeFromKeywords(ability.keywords) : ""),
+    [ability],
+  );
   return (
     <div className="ws-ability-wrapper">
       <div className={"ws-ability-container " + ability.color + "-border"}>
@@ -21,17 +26,26 @@ export const AbilityBox: FC<AbilityBoxProps> = ({ ability }) => {
             <ParseMarkdown markdown={ability.timing} />
           </div>
         </TornEdgeContainer>
+        {ability.cost && (
+          <div className={"ws-cost " + costType}>{ability.cost}</div>
+        )}
         <div className="ws-ability-body">
           <div className="ws-ability-name">
             <b>{ability.name}</b>
           </div>
           {ability.declare && (
             <div>
-              <b>Declare:</b> <ParseMarkdown markdown={ability.declare} />
+              <span className="smallcaps">
+                <b>Declare:</b>
+              </span>{" "}
+              <ParseMarkdown markdown={ability.declare} />
             </div>
           )}
           <div>
-            <b>Effect:</b> <ParseMarkdown markdown={ability.effect} />
+            <span className="smallcaps">
+              <b>Effect:</b>
+            </span>{" "}
+            <ParseMarkdown markdown={ability.effect} />
           </div>
         </div>
         {ability.keywords.length > 0 && (
@@ -46,7 +60,7 @@ export const AbilityBox: FC<AbilityBoxProps> = ({ ability }) => {
             <div className="ws-ability-keywords-list">
               <ParseMarkdown
                 markdown={ability.keywords.reduce(
-                  (prev, k) => (prev.length > 0 ? ", " : "") + k,
+                  (prev, k) => prev + (prev.length > 0 ? ", " : "") + k,
                   "",
                 )}
               />

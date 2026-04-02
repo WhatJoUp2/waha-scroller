@@ -1,10 +1,11 @@
 import type { Model, Unit, Weapon } from "../db/aosDB.types";
 
 export function getWeaponsFromUnit(unit: Unit): Weapon[] {
-  return unit.models.reduce<Weapon[]>(
+  const weapons = unit.models.reduce<Weapon[]>(
     (prev, m) => [...prev, ...getWeaponsFromModel(m)],
     [],
   );
+  return uniqueWeapons(weapons);
 }
 
 function getWeaponsFromModel(model: Model): Weapon[] {
@@ -20,8 +21,15 @@ function getWeaponsFromModel(model: Model): Weapon[] {
   return [...basic, ...advanced];
 }
 
+function uniqueWeapons(weapons: Weapon[]): Weapon[] {
+  return weapons.reduce<Weapon[]>((prev: Weapon[], w) => {
+    if (prev.findIndex((ww) => ww.name === w.name) === -1) return [...prev, w];
+    return prev;
+  }, []);
+}
+
 export function getNameAndSubtitle(name: string): string[] {
-  const VALID_SEPARATORS = [",", " with ", " on ", "("];
+  const VALID_SEPARATORS = [",", " with ", " on ", "(", "["];
   let separator = "";
   VALID_SEPARATORS.forEach((s) => {
     if (name.includes(s) && separator === "") separator = s;
@@ -34,4 +42,12 @@ export function getNameAndSubtitle(name: string): string[] {
   if (separator === ",") return [parsedName[0] + separator, parsedName[1]];
 
   return [parsedName[0], separator + parsedName[1]];
+}
+
+export function getCostTypeFromKeywords(keywords: string[]): string {
+  for (const k of keywords) {
+    if (k.includes("Spell")) return "spell";
+    if (k.includes("Prayer")) return "prayer  ";
+  }
+  return "command";
 }

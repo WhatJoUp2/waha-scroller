@@ -6,7 +6,7 @@ import {
   getUnitFromArmy,
   getUnitNamesFromArmy,
 } from "./db/aosDB";
-import { hexToCSSFilter } from "hex-to-css-filter";
+// import { hexToCSSFilter } from "hex-to-css-filter";
 import { toPng } from "@jpinsonneau/html-to-image";
 import type { Unit } from "./db/aosDB.types";
 import { Controller } from "./components/controller/Controller";
@@ -25,19 +25,19 @@ const App = () => {
   );
   const armyList = useMemo(() => getArmyNames(), []);
   const unitList = useMemo(
-    () => (army !== "" ? getUnitNamesFromArmy(army) : []),
+    () => (army !== "" ? getUnitNamesFromArmy(army).sort() : []),
     [army],
   );
 
-  useEffect(() => {
-    const r: any = document.querySelector(":root");
-    const color = "#994a15";
-    r.style.setProperty("--faction-main-color", color);
-    r.style.setProperty(
-      "--faction-main-color-filter",
-      hexToCSSFilter(color, { acceptanceLossPercentage: 1 }).filter,
-    );
-  }, []);
+  // useEffect(() => {
+  //   const r: any = document.querySelector(":root");
+  //   const color = "#994a15";
+  //   r.style.setProperty("--faction-main-color", color);
+  //   r.style.setProperty(
+  //     "--faction-main-color-filter",
+  //     hexToCSSFilter(color, { acceptanceLossPercentage: 1 }).filter,
+  //   );
+  // }, []);
 
   useEffect(() => {
     if (army === "" && armyList.length > 0) setArmy(armyList[0]);

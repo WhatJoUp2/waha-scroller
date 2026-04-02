@@ -14,8 +14,8 @@
   filter: var(--ability-yellow-filter);
 }
 
-.tornedge-container.grey-filter td {
-  filter: var(--ability-grey-filter);
+.tornedge-container.gray-filter td {
+  filter: var(--ability-gray-filter);
 }
 
 .tornedge-container.blue-filter td {

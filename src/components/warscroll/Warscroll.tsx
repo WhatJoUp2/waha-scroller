@@ -32,7 +32,11 @@ export const Warscroll: FC<WarscrollProps> = ({ unit, army, ref }) => {
               <div>{nameAndSubtitle[1]}</div>
             </div>
             <div className="ws-header-title-side">
-              <div className="ws-header-point">{unit.points}</div> Points
+              {unit.points > 0 && (
+                <>
+                  <div className="ws-header-point">{unit.points}</div> Points
+                </>
+              )}
             </div>
           </div>
         </TornEdgeContainer>

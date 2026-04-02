@@ -55,29 +55,31 @@ body {
 }
 
 :root {
-  --ability-black: #333;
-  --ability-yellow: #b8860b;
-  --ability-grey: #808080;
-  --ability-blue: #00008b;
-  --ability-orange: #a36303;
-  --ability-red: #8b0000;
-  --ability-purple: #4b0082;
-  --ability-green: #006400;
+  --faction-main-color: #000;
+  --faction-main-color-filter: none;
 
-  --ability-black-filter: brightness(0) saturate(100%) invert(18%) sepia(0%)
-    saturate(0%) hue-rotate(259deg) brightness(107%) contrast(96%);
-  --ability-yellow-filter: brightness(0) saturate(100%) invert(48%) sepia(86%)
-    saturate(1352%) hue-rotate(18deg) brightness(93%) contrast(91%);
-  --ability-grey-filter: brightness(0) saturate(100%) invert(56%) sepia(0%)
-    saturate(1795%) hue-rotate(252deg) brightness(89%) contrast(94%);
-  --ability-blue-filter: brightness(0) saturate(100%) invert(12%) sepia(87%)
-    saturate(3773%) hue-rotate(239deg) brightness(73%) contrast(136%);
-  --ability-orange-filter: brightness(0) saturate(100%) invert(33%) sepia(82%)
-    saturate(2067%) hue-rotate(29deg) brightness(90%) contrast(98%);
-  --ability-red-filter: brightness(0) saturate(100%) invert(12%) sepia(50%)
-    saturate(7489%) hue-rotate(22deg) brightness(83%) contrast(132%);
-  --ability-purple-filter: brightness(0) saturate(100%) invert(14%) sepia(76%)
-    saturate(4961%) hue-rotate(273deg) brightness(60%) contrast(117%);
-  --ability-green-filter: brightness(0) saturate(100%) invert(23%) sepia(62%)
-    saturate(2200%) hue-rotate(94deg) brightness(91%) contrast(105%);
+  --ability-black: #000;
+  --ability-yellow: #76602b;
+  --ability-gray: #606362;
+  --ability-blue: #28435c;
+  --ability-orange: #a34d14;
+  --ability-red: #802022;
+  --ability-purple: #5e4a79;
+  --ability-green: #3d5b26;
+
+  --ability-black-filter: none;
+  --ability-yellow-filter: brightness(0) saturate(100%) invert(37%) sepia(55%)
+    saturate(470%) hue-rotate(5deg) brightness(87%) contrast(87%);
+  --ability-gray-filter: invert(41%) sepia(10%) saturate(80%) hue-rotate(109deg)
+    brightness(91%) contrast(93%);
+  --ability-blue-filter: brightness(0) saturate(100%) invert(22%) sepia(12%)
+    saturate(2165%) hue-rotate(168deg) brightness(95%) contrast(87%);
+  --ability-orange-filter: brightness(0) saturate(100%) invert(30%) sepia(91%)
+    saturate(777%) hue-rotate(351deg) brightness(94%) contrast(93%);
+  --ability-red-filter: brightness(0) saturate(100%) invert(16%) sepia(63%)
+    saturate(2838%) hue-rotate(340deg) brightness(82%) contrast(92%);
+  --ability-purple-filter: brightness(0) saturate(100%) invert(31%) sepia(15%)
+    saturate(1525%) hue-rotate(223deg) brightness(89%) contrast(84%);
+  --ability-green-filter: invert(29%) sepia(9%) saturate(2835%)
+    hue-rotate(51deg) brightness(95%) contrast(84%);
 }

@@ -12,6 +12,7 @@ export const ParseMarkdown: FC<ParseMarkdownProps> = ({ markdown }) => {
         markdown
           .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
           .replace(/\^\^(.*?)\^\^/g, "<span class='smallcaps'>$1</span>")
+          .replace(/\*(.*?)\*/g, "<i>$1</i>")
           .replace(/\n(.*?)/g, "<br>$1"),
       ),
     [markdown],
