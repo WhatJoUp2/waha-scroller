@@ -9,6 +9,8 @@ export interface ControllerProps {
   onUnitNameChange: (value: string) => void;
   unitList: string[];
   onDownloadImage: () => void;
+  lowerBrightness: boolean;
+  onLowerBrightnessChange: (value: boolean) => void;
 }
 
 export const Controller: FC<ControllerProps> = ({
@@ -19,8 +21,10 @@ export const Controller: FC<ControllerProps> = ({
   onUnitNameChange,
   unitList,
   unitName,
+  lowerBrightness,
+  onLowerBrightnessChange,
 }) => {
-  const [colorTheme, setColorTheme] = useState("orange");
+  const [colorTheme, setColorTheme] = useState("Black");
 
   const colors = [
     "Black",
@@ -87,6 +91,14 @@ export const Controller: FC<ControllerProps> = ({
         </select>
       </div>
       <div>
+        <div>
+          <span>Lower Brightness (For TTS): </span>
+          <input
+            checked={lowerBrightness}
+            type="checkbox"
+            onChange={(ev) => onLowerBrightnessChange(ev.currentTarget.checked)}
+          />
+        </div>
         <button onClick={onDownloadImage}>Download Warscroll!</button>
       </div>
     </div>

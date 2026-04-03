@@ -12,13 +12,22 @@ export interface WarscrollProps {
   army: string;
   unit: Unit;
   ref: RefObject<HTMLDivElement | null>;
+  lowerBrightness: boolean;
 }
 
-export const Warscroll: FC<WarscrollProps> = ({ unit, army, ref }) => {
+export const Warscroll: FC<WarscrollProps> = ({
+  unit,
+  army,
+  ref,
+  lowerBrightness,
+}) => {
   const nameAndSubtitle = useMemo(() => getNameAndSubtitle(unit.name), [unit]);
 
   return (
-    <div className="ws-background" ref={ref}>
+    <div
+      className={"ws-background " + (lowerBrightness ? "lower-brightness" : "")}
+      ref={ref}
+    >
       <div className="ws-header">
         <Characteristics unit={unit} />
         <TornEdgeContainer className="ws-header-container">

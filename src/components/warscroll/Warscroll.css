@@ -11,6 +11,10 @@
   flex-direction: column;
 }
 
+.ws-background.lower-brightness {
+  filter: brightness(0.8);
+}
+
 /* HEADER */
 
 .ws-header {

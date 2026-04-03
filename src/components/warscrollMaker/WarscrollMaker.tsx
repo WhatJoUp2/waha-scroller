@@ -15,6 +15,7 @@ export const WarscrollMaker = () => {
   // const UNIT_NAME = "Daemonsmith on Infernal Taurus";
   const [army, setArmy] = useState("");
   const [unitName, setUnitName] = useState("");
+  const [lowerBrightness, setLowerBrightness] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
   const unit: Unit | null = useMemo(
@@ -75,10 +76,19 @@ export const WarscrollMaker = () => {
           onUnitNameChange={(value) => setUnitName(value)}
           unitList={unitList}
           unitName={unitName}
+          lowerBrightness={lowerBrightness}
+          onLowerBrightnessChange={(value) => setLowerBrightness(value)}
         />
       </div>
       <div className="warscroll-container">
-        {unit && <Warscroll army={army} unit={unit} ref={ref} />}
+        {unit && (
+          <Warscroll
+            lowerBrightness={lowerBrightness}
+            army={army}
+            unit={unit}
+            ref={ref}
+          />
+        )}
       </div>
     </div>
   );
