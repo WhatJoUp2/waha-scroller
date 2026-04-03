@@ -1,6 +1,8 @@
 // import dbJson from "./aosDB.json";
 import type { DB, Unit } from "./aosDB.types";
 
+export const ARMY_OTHER = "Manifestations";
+
 let db: DB; //dbJson as any;
 let indexedDB: IDBDatabase;
 const localStorageName = "savedDB";
@@ -51,16 +53,18 @@ export function loadDBFromFile(data: DB): void {
   saveDB();
 }
 
-export function getArmyNames(): string[] {
+export function getArmyNames(addOther: boolean = true): string[] {
   const keys = Object.keys(db.armies);
   const ret: string[] = [];
   keys.forEach((k) => {
     if (!db.armies[k].isArmyOfRenown) ret.push(k);
   });
+  if (addOther) ret.push(ARMY_OTHER);
   return ret;
 }
 
-export function getUnitNamesFromArmy(army: string) {
+export function getUnitNamesFromArmy(army: string): string[] {
+  if (army === ARMY_OTHER) return getUnitsFromUnits().map((u) => u.name);
   return db.armies[army].units.map((u) => u.name);
 }
 
@@ -69,5 +73,11 @@ function getUnitsFromArmy(army: string): Unit[] {
 }
 
 export function getUnitFromArmy(army: string, unit: string): Unit | null {
+  if (army === ARMY_OTHER)
+    return getUnitsFromUnits().find((u) => u.name === unit) || null;
   return getUnitsFromArmy(army).find((u) => u.name === unit) || null;
+}
+
+function getUnitsFromUnits(): Unit[] {
+  return db.units;
 }
