@@ -3,7 +3,7 @@
   background-image: url("/src/assets/images/textured-paper.png");
   color: black;
   width: 1000px;
-  height: 1400px;
+  min-height: 1400px;
   padding: 50px;
   box-sizing: border-box;
   position: relative;
@@ -35,7 +35,7 @@
 
 .ws-header-title-side {
   padding: 0 10px;
-  font-size: 20px;
+  font-size: 24px;
   text-transform: none;
   font-weight: normal;
   font-style: italic;
@@ -111,7 +111,7 @@
 /* ATTACKS */
 
 .ws-attacks {
-  font-size: 20px;
+  font-size: 24px;
   border-collapse: collapse;
   border-bottom: 2px solid var(--faction-main-color);
   margin-top: 20px;
@@ -175,7 +175,7 @@
   text-align: left;
   border: 2px solid black;
   border-top: none;
-  font-size: 20px;
+  font-size: 24px;
   background-color: #fff;
 }
 
@@ -186,7 +186,7 @@
 
 .ws-ability-timing {
   color: #fff;
-  font-size: 19px;
+  font-size: 24 px;
   padding: 3px 5px;
   font-weight: bold;
   display: flex;
@@ -260,9 +260,10 @@
   border-collapse: collapse;
   border: 2px solid var(--faction-main-color);
   background-color: #fff;
-  font-size: 20px;
+  font-size: 24px;
   font-variant: small-caps;
   font-weight: bold;
+  margin-top: 20px;
 }
 
 .ws-keywords-container th {
