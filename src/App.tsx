@@ -3,6 +3,7 @@ import "./App.css";
 import { WarscrollMaker } from "./components/warscrollMaker/WarscrollMaker";
 import { Loader } from "./components/loader/Loader";
 import { loadDBFromIDB, openDB } from "./db/aosDB";
+import { ArmyContextProvider } from "./context/ArmyContext";
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -16,7 +17,9 @@ const App = () => {
   }, []);
 
   return isLoaded ? (
-    <WarscrollMaker />
+    <ArmyContextProvider>
+      <WarscrollMaker />
+    </ArmyContextProvider>
   ) : (
     <Loader onLoad={() => setIsLoaded(true)} />
   );
