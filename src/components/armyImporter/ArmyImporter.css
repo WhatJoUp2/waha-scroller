@@ -9,25 +9,48 @@
   margin-top: 20px;
 }
 
+.importer-container > div, .importer-parsed-container > div {
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  justify-content: start;
+  flex-direction: column;
+}
+
 .importer-title {
   font-weight: bold;
   font-size: 30px;
   font-variant: small-caps;
-}
-
-.importer-container > div {
-  margin: 5px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: row !important; 
+  align-items: center !important;
+  justify-content: space-between !important;
 }
 
-.importer-container button {
-  font-size: 20px;
-  font-family: "MinionPro-Regular";
-  font-weight: bold;
+.importer-parsed-container b {
   font-variant: small-caps;
+}
+
+.importer-parsed-container button {
+  font-family: MinionPro-Regular;
+  font-size: 20px;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.importer-container button:disabled {
+  color: #aaa;
+}
+
+.importer-container button:hover {
+  font-weight: bold;
+}
+
+.importer-container button.active {
+  text-decoration: underline;
 }
 
 .importer-container textarea {
@@ -37,4 +60,11 @@
 
 .importer-container span {
   margin-right: 5px;
+}
+
+.importer-import-button {
+  font-size: 20px;
+  font-family: "MinionPro-Regular";
+  font-weight: bold;
+  font-variant: small-caps;
 }

@@ -47,7 +47,6 @@ export interface ArmyList {
   prayerLore?: string;
   manifestationLore?: string;
   regiments: Regiment[];
-  factionTerrain?: string;
 }
 
 export interface Regiment {
@@ -58,19 +57,73 @@ export interface Regiment {
   }[];
 }
 
+function withoutCost(line: string) {
+  return line.split(/ \(\d*\)/)[0];
+}
+
+function getRegimentFromBlock(block: string): Regiment | null {
+  const lines = block.split(/\n/);
+  if (
+    lines[0].match("Regiment") ||
+    lines[0].match("Auxiliary") ||
+    lines[0].match("Faction Terrain")
+  ) {
+    const name = lines[0];
+    let units: { unitName: string; traits: string[] }[] = [];
+    for (let i = 1; i < lines.length; i++) {
+      if (lines[i].match("• ")) {
+        units[units.length - 1].traits.push(lines[i].split("• ")[1]);
+      } else {
+        units.push({ unitName: withoutCost(lines[i]), traits: [] });
+      }
+    }
+    return { name, units };
+  }
+  return null;
+}
+
 export function parseArmyList(list: string): ArmyList {
   const listBlocks = list.split(/\n\n/gm);
   const infoLines = listBlocks[1].split(/\n/);
-  // TODO REMOVE
-  console.log(infoLines);
+  const regiments: Regiment[] = [];
 
   const spellLoreLine = infoLines.find((line) => line.match("Spell"));
-  // const spellLore = spellLoreLine ?  : "";
+  const spellLore = spellLoreLine
+    ? withoutCost(spellLoreLine.split(" - ")[1])
+    : undefined;
 
-  console.log(spellLoreLine);
+  const prayerLoreLine = infoLines.find((line) => line.match("Prayer"));
+  const prayerLore = prayerLoreLine
+    ? withoutCost(prayerLoreLine.split(" - ")[1])
+    : undefined;
+
+  const manifestationLoreLine = infoLines.find((line) =>
+    line.match("Manifestation"),
+  );
+  const manifestationLore = manifestationLoreLine
+    ? withoutCost(manifestationLoreLine.split(" - ")[1])
+    : undefined;
+
+  for (let i = 2; i < listBlocks.length; i++) {
+    const regiment = getRegimentFromBlock(listBlocks[i]);
+    if (regiment) regiments.push(regiment);
+  }
+
+  console.log({
+    army: infoLines[0],
+    formation: infoLines[1],
+    regiments: regiments,
+    manifestationLore,
+    prayerLore,
+    spellLore,
+  });
 
   return {
     army: infoLines[0],
     formation: infoLines[1],
+    regiments: regiments,
+    manifestationLore,
+    prayerLore,
+    spellLore,
   };
 }

@@ -81,3 +81,9 @@ export function getUnitFromArmy(army: string, unit: string): Unit | null {
 function getUnitsFromUnits(): Unit[] {
   return db.units;
 }
+
+export function getUnitNamesFromManifestationLore(lore: string) {
+  const loreUni = db.universal.find(u => u.name === lore);
+  if(loreUni === undefined) return [];
+  return loreUni.units.map(u => u.name);
+}

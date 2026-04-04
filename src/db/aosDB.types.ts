@@ -1,6 +1,7 @@
 export interface DB {
   units: Unit[];
   armies: SubObject<Army>;
+  universal: Universal[];
 }
 
 type SubObject<V> = { [key: string]: V };
@@ -114,4 +115,17 @@ export interface Army {
   options: []; //TODO
   legends: boolean;
   paths: []; //TODO
+}
+
+export interface Universal {
+  name: string;
+  id: string;
+  type: number;
+  superType: string;
+  points: number;
+  sog: boolean;
+  unitIds: string[];
+  units: Unit[];
+  abilities: Ability[]
+  rules: []; //TODO
 }

@@ -3,6 +3,7 @@
 [X] Ward Saves
 [X] Ability Costs
 [X] Export as PNG
+[ ] Add traits
 
 # Army Parser
 
@@ -10,4 +11,4 @@
 
 # Army Import
 
-[ ] Everything
+[X] Everything
