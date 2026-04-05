@@ -87,6 +87,13 @@ export const Controller: FC<ControllerProps> = ({ onDownloadImage }) => {
             onChange={(ev) => setIsLowerBrightness(ev.currentTarget.checked)}
           />
         </div>
+        <div>
+          <span>Include imported trait: </span>
+          <input type="checkbox" />
+        </div>
+      </div>
+      <div>
+        <button>Clear Database</button>
         <button onClick={onDownloadImage}>Download Warscroll!</button>
       </div>
     </div>

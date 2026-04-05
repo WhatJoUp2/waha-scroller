@@ -110,11 +110,61 @@ export interface Army {
   alliance: string; // enum?
   isArmyOfRenown: false;
   units: Unit[];
-  upgrades: []; // TODO
+  upgrades: Upgrades; // TODO
   regimentsOfRenown: []; //TODO
   options: []; //TODO
   legends: boolean;
   paths: []; //TODO
+}
+
+export interface Upgrades {
+  battleFormations: BattleFormation[];
+  battleTraits: BattleTrait[];
+  lores: {
+    manifestation: Lore[];
+    spell: Lore[];
+    prayer: Lore[];
+  };
+  enhancements: SubObject<Enhancement>;
+}
+
+export interface BattleFormation {
+  name: string;
+  id: string;
+  type: number;
+  superType: string;
+  abilities: Ability[];
+  rules: []; //TODO
+  sog: boolean;
+  points: number;
+}
+
+export interface BattleTrait {
+  name: string;
+  id: string;
+  type: number;
+  superType: string;
+  abilities: Ability[];
+  rules: []; //TODO
+  sog: boolean;
+  points: number;
+}
+
+export interface Lore {
+  name: string;
+  id: string;
+  type: number;
+  superType: string;
+  points: number;
+  sog: boolean;
+  unitIds: string[];
+  units: Unit[];
+  abilities: Ability[];
+  rules: []; //TODO
+}
+
+export interface Enhancement {
+  name: string; //LEFT HERE
 }
 
 export interface Universal {
@@ -126,6 +176,6 @@ export interface Universal {
   sog: boolean;
   unitIds: string[];
   units: Unit[];
-  abilities: Ability[]
+  abilities: Ability[];
   rules: []; //TODO
 }

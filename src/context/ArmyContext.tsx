@@ -10,9 +10,10 @@ interface ArmyContextI {
   selectedUnit: {
     army: string;
     unitName: string;
+    traits?: string[];
   };
   setSelectedUnit: (
-    selectedUnit: Partial<{ army: string; unitName: string }>,
+    selectedUnit: Partial<{ army: string; unitName: string; traits: string[] }>,
   ) => void;
   theme: string;
   setTheme: (value: string) => void;
@@ -38,6 +39,7 @@ export const ArmyContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [selectedUnit, setSelectedUnit] = useState<{
     army: string;
     unitName: string;
+    traits?: string[];
   }>(initialArmyContext.selectedUnit);
   const [theme, setTheme] = useState(initialArmyContext.theme);
   const [isLowerBrightness, setIsLowerBrightness] = useState(
@@ -45,22 +47,26 @@ export const ArmyContextProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 
   const handleSetSelectedUnit = (
-    value: Partial<{ army: string; unitName: string }>,
+    value: Partial<{ army: string; unitName: string; traits: string[] }>,
   ) => {
+    const newTraits = value.traits || [];
     if (value.army && value.unitName) {
       setSelectedUnit({
         army: value.army,
         unitName: value.unitName,
+        traits: newTraits,
       });
     } else if (value.unitName) {
       setSelectedUnit({
         army: selectedUnit.army,
         unitName: value.unitName,
+        traits: newTraits,
       });
     } else if (value.army) {
       setSelectedUnit({
         army: value.army,
         unitName: getUnitNamesFromArmy(value.army)[0],
+        traits: newTraits,
       });
     }
   };
