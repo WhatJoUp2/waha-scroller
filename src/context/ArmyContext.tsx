@@ -5,6 +5,7 @@ import {
   type PropsWithChildren,
 } from "react";
 import { getUnitNamesFromArmy } from "../db/aosDB";
+import type { Ability } from "../db/aosDB.types";
 
 interface ArmyContextI {
   selectedUnit: {
@@ -14,6 +15,16 @@ interface ArmyContextI {
   };
   setSelectedUnit: (
     selectedUnit: Partial<{ army: string; unitName: string; traits: string[] }>,
+  ) => void;
+  selectedAbilityList?: {
+    army: string;
+    name: string;
+    abilities: Ability[];
+  };
+  setSelectedAbilityList: (
+    army: string,
+    name: string,
+    abilities: Ability[],
   ) => void;
   theme: string;
   setTheme: (value: string) => void;
@@ -29,6 +40,12 @@ const initialArmyContext: ArmyContextI = {
     unitName: "Beastlord",
   },
   setSelectedUnit: () => {},
+  selectedAbilityList: {
+    army: "",
+    name: "",
+    abilities: [],
+  },
+  setSelectedAbilityList: () => {},
   theme: "Black",
   setTheme: () => {},
   isLowerBrightness: true,
@@ -45,6 +62,14 @@ export const ArmyContextProvider: FC<PropsWithChildren> = ({ children }) => {
     unitName: string;
     traits?: string[];
   }>(initialArmyContext.selectedUnit);
+  const [selectedAbilityList, setSelectedAbilityList] = useState<
+    | {
+        army: string;
+        name: string;
+        abilities: Ability[];
+      }
+    | undefined
+  >();
   const [theme, setTheme] = useState(initialArmyContext.theme);
   const [isLowerBrightness, setIsLowerBrightness] = useState(
     initialArmyContext.isLowerBrightness,
@@ -76,6 +101,15 @@ export const ArmyContextProvider: FC<PropsWithChildren> = ({ children }) => {
         traits: newTraits,
       });
     }
+    setSelectedAbilityList(undefined);
+  };
+
+  const handleSetSelectAbilityList = (
+    army: string,
+    name: string,
+    abilities: Ability[],
+  ) => {
+    setSelectedAbilityList({ army, abilities, name });
   };
 
   const handleSetTheme = (color: string) => {
@@ -97,6 +131,8 @@ export const ArmyContextProvider: FC<PropsWithChildren> = ({ children }) => {
       value={{
         selectedUnit,
         setSelectedUnit: handleSetSelectedUnit,
+        selectedAbilityList,
+        setSelectedAbilityList: handleSetSelectAbilityList,
         theme,
         setTheme: handleSetTheme,
         isLowerBrightness,

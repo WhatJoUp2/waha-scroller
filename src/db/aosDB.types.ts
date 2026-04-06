@@ -2,6 +2,11 @@ export interface DB {
   units: Unit[];
   armies: SubObject<Army>;
   universal: Universal[];
+  lores: {
+    spell: Lore[];
+    prayer: Lore[];
+    manifestation: Lore[];
+  };
 }
 
 type SubObject<V> = { [key: string]: V };

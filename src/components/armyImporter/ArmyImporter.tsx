@@ -2,10 +2,20 @@ import { useContext, useMemo, useState, type FC } from "react";
 import "./ArmyImporter.css";
 import { parseArmyList, type ArmyList } from "../../utils/armyListParser";
 import { ArmyContext } from "../../context/ArmyContext";
-import { ARMY_OTHER, getUnitNamesFromManifestationLore } from "../../db/aosDB";
+import {
+  ARMY_OTHER,
+  getBattleTraitsWithFormation,
+  getLoreFromArmy,
+  getUnitNamesFromManifestationLore,
+} from "../../db/aosDB";
 
 export const ArmyImporter: FC = () => {
-  const { selectedUnit, setSelectedUnit } = useContext(ArmyContext);
+  const {
+    selectedUnit,
+    setSelectedUnit,
+    setSelectedAbilityList,
+    selectedAbilityList,
+  } = useContext(ArmyContext);
   const [armyListText, setArmyListText] = useState("");
   const [armyList, setArmyList] = useState<ArmyList | null>(null);
 
@@ -33,14 +43,16 @@ export const ArmyImporter: FC = () => {
     });
   };
 
-  const isActive = (unit: string) => {
-    return unit === selectedUnit.unitName ? "active" : "";
+  const isActive = (item: string) => {
+    if (selectedAbilityList)
+      return item === selectedAbilityList.name ? "active" : "";
+    return item === selectedUnit.unitName ? "active" : "";
   };
 
   return (
     <div className="importer-container">
       <div className="importer-title">
-        Army Importer{" "}
+        Army Importer
         {armyList && (
           <button
             className="importer-import-button"
@@ -56,18 +68,56 @@ export const ArmyImporter: FC = () => {
             <b>
               {armyList.army} ({armyList.formation}):
             </b>
-            <button disabled>Faction Rules</button>
+            <button
+              className={isActive("Battle Traits /" + armyList.formation)}
+              onClick={() => {
+                setSelectedAbilityList(
+                  armyList.army,
+                  "Battle Traits /" + armyList.formation,
+                  getBattleTraitsWithFormation(
+                    armyList.army,
+                    armyList.formation,
+                  ),
+                );
+              }}
+            >
+              Faction Rules
+            </button>
           </div>
           {armyList.spellLore && (
             <div>
               <b>Spell Lore: </b>
-              <button disabled>{armyList.spellLore}</button>
+              <button
+                className={isActive(armyList.spellLore)}
+                onClick={() =>
+                  setSelectedAbilityList(
+                    armyList.army,
+                    armyList.spellLore || "",
+                    getLoreFromArmy(armyList.army, armyList.spellLore || "")
+                      ?.abilities || [],
+                  )
+                }
+              >
+                {armyList.spellLore}
+              </button>
             </div>
           )}
           {armyList.prayerLore && (
             <div>
               <b>Prayer Lore: </b>
-              <button disabled>{armyList.prayerLore}</button>
+              <button
+                className={isActive(armyList.prayerLore)}
+                onClick={() =>
+                  setSelectedAbilityList(
+                    armyList.army,
+                    armyList.prayerLore || "",
+                    getLoreFromArmy(armyList.army, armyList.prayerLore || "")
+                      ?.abilities || [],
+                  )
+                }
+              >
+                {armyList.prayerLore}
+              </button>
             </div>
           )}
           {armyList.manifestationLore && (

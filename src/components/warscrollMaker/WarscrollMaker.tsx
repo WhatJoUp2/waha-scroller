@@ -7,14 +7,16 @@ import { ArmyImporter } from "../armyImporter/ArmyImporter";
 
 export const WarscrollMaker = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const { selectedUnit } = useContext(ArmyContext);
+  const { selectedUnit, selectedAbilityList } = useContext(ArmyContext);
 
   const onDownloadImage = () => {
     if (ref.current) {
       toPng(ref.current).then((data) => {
         const link = document.createElement("a");
         link.href = data;
-        link.download = selectedUnit.unitName + ".png";
+        link.download = selectedAbilityList
+          ? selectedAbilityList.name + ".png"
+          : selectedUnit.unitName + ".png";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);

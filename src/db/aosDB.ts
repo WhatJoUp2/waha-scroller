@@ -1,5 +1,5 @@
 // import dbJson from "./aosDB.json";
-import type { Ability, ArmyEnhancement, DB, Unit } from "./aosDB.types";
+import type { Ability, ArmyEnhancement, DB, Lore, Unit } from "./aosDB.types";
 
 export const ARMY_OTHER = "Manifestations";
 
@@ -115,4 +115,37 @@ export function getEnhancementFromArmy(
   enhancement: string,
 ): Ability | undefined {
   return getEnhancementsFromArmy(army).find((u) => u.name === enhancement);
+}
+
+export function getLoreFromArmy(army: string, lore: string): Lore | undefined {
+  return [
+    ...db.armies[army].upgrades.lores.spell,
+    ...db.armies[army].upgrades.lores.prayer,
+    ...db.armies[army].upgrades.lores.manifestation,
+  ].find((l) => l.name.match(lore));
+}
+
+export function getBattleTraits(army: string): Ability[] {
+  return db.armies[army].upgrades.battleTraits.reduce<Ability[]>(
+    (prev, b) => [...prev, ...b.abilities],
+    [],
+  );
+}
+
+export function getBattleFormation(army: string, formation: string): Ability[] {
+  return (
+    db.armies[army].upgrades.battleFormations.find((f) => f.name === formation)
+      ?.abilities || []
+  );
+}
+
+export function getBattleTraitsWithFormation(
+  army: string,
+  formation: string,
+): Ability[] {
+  const markedFormation = getBattleFormation(army, formation).map((f) => ({
+    ...f,
+    name: "Formation: " + f.name,
+  }));
+  return [...getBattleTraits(army), ...markedFormation];
 }
