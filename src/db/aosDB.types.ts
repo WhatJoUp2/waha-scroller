@@ -125,7 +125,7 @@ export interface Upgrades {
     spell: Lore[];
     prayer: Lore[];
   };
-  enhancements: SubObject<Enhancement>;
+  enhancements: SubObject<ArmyEnhancement[]>;
 }
 
 export interface BattleFormation {
@@ -163,8 +163,18 @@ export interface Lore {
   rules: []; //TODO
 }
 
-export interface Enhancement {
-  name: string; //LEFT HERE
+export interface ArmyEnhancement {
+  name: string;
+  upgrades: {
+    name: string;
+    id: string;
+    type: number;
+    superType: string;
+    abilities: Ability[];
+    rules: []; //TODO
+    sog: boolean;
+    points: number;
+  }[];
 }
 
 export interface Universal {

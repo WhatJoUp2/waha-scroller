@@ -19,6 +19,8 @@ interface ArmyContextI {
   setTheme: (value: string) => void;
   isLowerBrightness: boolean;
   setIsLowerBrightness: (value: boolean) => void;
+  includeTraits: boolean;
+  setIncludeTraits: (value: boolean) => void;
 }
 
 const initialArmyContext: ArmyContextI = {
@@ -31,6 +33,8 @@ const initialArmyContext: ArmyContextI = {
   setTheme: () => {},
   isLowerBrightness: true,
   setIsLowerBrightness: () => {},
+  includeTraits: true,
+  setIncludeTraits: () => {},
 };
 
 export const ArmyContext = createContext<ArmyContextI>(initialArmyContext);
@@ -44,6 +48,9 @@ export const ArmyContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState(initialArmyContext.theme);
   const [isLowerBrightness, setIsLowerBrightness] = useState(
     initialArmyContext.isLowerBrightness,
+  );
+  const [includeTraits, setIncludeTraits] = useState(
+    initialArmyContext.includeTraits,
   );
 
   const handleSetSelectedUnit = (
@@ -92,8 +99,10 @@ export const ArmyContextProvider: FC<PropsWithChildren> = ({ children }) => {
         setSelectedUnit: handleSetSelectedUnit,
         theme,
         setTheme: handleSetTheme,
-        isLowerBrightness: isLowerBrightness,
-        setIsLowerBrightness: setIsLowerBrightness,
+        isLowerBrightness,
+        setIsLowerBrightness,
+        includeTraits,
+        setIncludeTraits,
       }}
     >
       {children}

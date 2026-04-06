@@ -29,7 +29,7 @@ export const ArmyImporter: FC = () => {
     setSelectedUnit({
       army: isManifestation ? ARMY_OTHER : armyList?.army,
       unitName: unitName,
-      traits
+      traits,
     });
   };
 
@@ -41,7 +41,14 @@ export const ArmyImporter: FC = () => {
     <div className="importer-container">
       <div className="importer-title">
         Army Importer{" "}
-        {armyList && <button className="importer-import-button" onClick={() => setArmyList(null)}>&lt; Back</button>}
+        {armyList && (
+          <button
+            className="importer-import-button"
+            onClick={() => setArmyList(null)}
+          >
+            &lt; Back
+          </button>
+        )}
       </div>
       {armyList && (
         <div className="importer-parsed-container">
@@ -67,12 +74,14 @@ export const ArmyImporter: FC = () => {
             <div>
               <b>Manifestation Lore ({armyList.manifestationLore}): </b>
               {manifestationUnits.map((u) => (
-                <button
-                  className={isActive(u)}
-                  onClick={() => handleClickUnit(u, undefined, true)}
-                >
-                  • {u}
-                </button>
+                <div key={u}>
+                  <button
+                    className={isActive(u)}
+                    onClick={() => handleClickUnit(u, undefined, true)}
+                  >
+                    • {u}
+                  </button>
+                </div>
               ))}
             </div>
           )}
@@ -99,7 +108,9 @@ export const ArmyImporter: FC = () => {
             value={armyListText}
             onChange={(ev) => setArmyListText(ev.currentTarget.value)}
           />
-          <button className="importer-import-button" onClick={handleImportList}>Import</button>
+          <button className="importer-import-button" onClick={handleImportList}>
+            Import
+          </button>
         </>
       )}
     </div>

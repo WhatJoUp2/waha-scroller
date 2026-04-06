@@ -1,11 +1,13 @@
 // import dbJson from "./aosDB.json";
-import type { DB, Unit } from "./aosDB.types";
+import type { Ability, ArmyEnhancement, DB, Unit } from "./aosDB.types";
 
 export const ARMY_OTHER = "Manifestations";
 
 let db: DB; //dbJson as any;
 let indexedDB: IDBDatabase;
 const localStorageName = "savedDB";
+
+// INDEXED DB
 
 export function openDB(successCallback: () => void) {
   const request = window.indexedDB.open(localStorageName);
@@ -53,6 +55,8 @@ export function loadDBFromFile(data: DB): void {
   saveDB();
 }
 
+// DB Read
+
 export function getArmyNames(addOther: boolean = true): string[] {
   const keys = Object.keys(db.armies);
   const ret: string[] = [];
@@ -83,7 +87,32 @@ function getUnitsFromUnits(): Unit[] {
 }
 
 export function getUnitNamesFromManifestationLore(lore: string) {
-  const loreUni = db.universal.find(u => u.name === lore);
-  if(loreUni === undefined) return [];
-  return loreUni.units.map(u => u.name);
+  const loreUni = db.universal.find((u) => u.name === lore);
+  if (loreUni === undefined) return [];
+  return loreUni.units.map((u) => u.name);
+}
+
+export function getEnhancementsFromArmy(army: string): Ability[] {
+  if (!db.armies[army]) return [];
+  const enhancementObj = db.armies[army].upgrades.enhancements;
+  return Object.keys(enhancementObj)
+    .map((k) => enhancementObj[k])
+    .reduce<ArmyEnhancement[]>((prev, e) => [...prev, ...e], [])
+    .reduce<Ability[]>(
+      (prev, e) => [
+        ...prev,
+        ...e.upgrades.reduce<Ability[]>(
+          (prev, u) => [...prev, ...u.abilities],
+          [],
+        ),
+      ],
+      [],
+    );
+}
+
+export function getEnhancementFromArmy(
+  army: string,
+  enhancement: string,
+): Ability | undefined {
+  return getEnhancementsFromArmy(army).find((u) => u.name === enhancement);
 }

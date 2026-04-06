@@ -15,6 +15,8 @@ export const Controller: FC<ControllerProps> = ({ onDownloadImage }) => {
     setSelectedUnit,
     setTheme,
     theme,
+    includeTraits,
+    setIncludeTraits,
   } = useContext(ArmyContext);
 
   const armyList = useMemo(() => getArmyNames(), []);
@@ -88,12 +90,16 @@ export const Controller: FC<ControllerProps> = ({ onDownloadImage }) => {
           />
         </div>
         <div>
-          <span>Include imported trait: </span>
-          <input type="checkbox" />
+          <span>Include imported traits: </span>
+          <input
+            checked={includeTraits}
+            onChange={(ev) => setIncludeTraits(ev.currentTarget.checked)}
+            type="checkbox"
+          />
         </div>
       </div>
       <div>
-        <button>Clear Database</button>
+        {/* <button>Clear Database</button> */}
         <button onClick={onDownloadImage}>Download Warscroll!</button>
       </div>
     </div>
