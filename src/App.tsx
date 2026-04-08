@@ -18,7 +18,11 @@ const App = () => {
 
   return isLoaded ? (
     <ArmyContextProvider>
-      <WarscrollMaker />
+      <WarscrollMaker
+        onUnload={() => {
+          setIsLoaded(false);
+        }}
+      />
     </ArmyContextProvider>
   ) : (
     <Loader onLoad={() => setIsLoaded(true)} />

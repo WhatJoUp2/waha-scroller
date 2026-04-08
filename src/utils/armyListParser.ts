@@ -40,6 +40,8 @@ Server Version: 3.0.9
 Data Version: v40
 */
 
+import type { Ability } from "../db/aosDB.types";
+
 export interface ArmyList {
   army: string;
   formation: string;
@@ -109,21 +111,18 @@ export function parseArmyList(list: string): ArmyList {
     if (regiment) regiments.push(regiment);
   }
 
-  console.log({
-    army: infoLines[0],
-    formation: infoLines[1],
-    regiments: regiments,
-    manifestationLore,
-    prayerLore,
-    spellLore,
-  });
-
   return {
     army: infoLines[0],
-    formation: infoLines[1],
+    formation: withoutCost(infoLines[1]),
     regiments: regiments,
     manifestationLore,
     prayerLore,
     spellLore,
   };
+}
+
+export function splitGimicks(list: Ability[]): Ability[][] {
+  const nonGimick = list.filter((a) => a.keywords.length === 0);
+  const gimick = list.filter((a) => a.keywords.length !== 0);
+  return [nonGimick, gimick];
 }

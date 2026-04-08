@@ -5,9 +5,13 @@ import { getArmyNames, getUnitNamesFromArmy } from "../../db/aosDB";
 
 export interface ControllerProps {
   onDownloadImage: () => void;
+  onUnload: () => void;
 }
 
-export const Controller: FC<ControllerProps> = ({ onDownloadImage }) => {
+export const Controller: FC<ControllerProps> = ({
+  onUnload,
+  onDownloadImage,
+}) => {
   const {
     isLowerBrightness,
     selectedUnit,
@@ -99,7 +103,15 @@ export const Controller: FC<ControllerProps> = ({ onDownloadImage }) => {
         </div>
       </div>
       <div>
-        {/* <button>Clear Database</button> */}
+        <button
+          onClick={() => {
+            if (window.confirm("Are you sure you want to clear all data?")) {
+              onUnload();
+            }
+          }}
+        >
+          Clear Database
+        </button>
         <button onClick={onDownloadImage}>Download Warscroll!</button>
       </div>
     </div>

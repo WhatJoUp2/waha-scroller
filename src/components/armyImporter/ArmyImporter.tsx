@@ -1,13 +1,19 @@
 import { useContext, useMemo, useState, type FC } from "react";
 import "./ArmyImporter.css";
-import { parseArmyList, type ArmyList } from "../../utils/armyListParser";
+import {
+  parseArmyList,
+  splitGimicks,
+  type ArmyList,
+} from "../../utils/armyListParser";
 import { ArmyContext } from "../../context/ArmyContext";
 import {
   ARMY_OTHER,
   getBattleTraitsWithFormation,
   getLoreFromArmy,
+  getUnitNamesFromArmy,
   getUnitNamesFromManifestationLore,
 } from "../../db/aosDB";
+import { removeMarkup } from "../../utils/utils";
 
 export const ArmyImporter: FC = () => {
   const {
@@ -19,10 +25,26 @@ export const ArmyImporter: FC = () => {
   const [armyListText, setArmyListText] = useState("");
   const [armyList, setArmyList] = useState<ArmyList | null>(null);
 
+  const armyUnitList = useMemo(() => {
+    if (armyList?.army) return getUnitNamesFromArmy(armyList.army);
+    return [];
+  }, [armyList]);
+
+  const [nonGimicks, gimicks] = useMemo(() => {
+    if (armyList?.army)
+      return splitGimicks(
+        getBattleTraitsWithFormation(armyList.army, armyList.formation),
+      );
+    return [[], []];
+  }, [armyList]);
+
   const manifestationUnits = useMemo(
     () =>
       armyList?.manifestationLore
-        ? getUnitNamesFromManifestationLore(armyList.manifestationLore)
+        ? getUnitNamesFromManifestationLore(
+            armyList.army,
+            armyList.manifestationLore,
+          )
         : [],
     [armyList],
   );
@@ -31,13 +53,9 @@ export const ArmyImporter: FC = () => {
     setArmyList(parseArmyList(armyListText));
   };
 
-  const handleClickUnit = (
-    unitName: string,
-    traits?: string[],
-    isManifestation: boolean = false,
-  ) => {
+  const handleClickUnit = (unitName: string, traits?: string[]) => {
     setSelectedUnit({
-      army: isManifestation ? ARMY_OTHER : armyList?.army,
+      army: armyUnitList.includes(unitName) ? armyList?.army : ARMY_OTHER,
       unitName: unitName,
       traits,
     });
@@ -74,15 +92,26 @@ export const ArmyImporter: FC = () => {
                 setSelectedAbilityList(
                   armyList.army,
                   "Battle Traits /" + armyList.formation,
-                  getBattleTraitsWithFormation(
-                    armyList.army,
-                    armyList.formation,
-                  ),
+                  nonGimicks,
                 );
               }}
             >
               Faction Rules
             </button>
+            {gimicks.length > 0 && (
+              <button
+                className={isActive(removeMarkup(gimicks[0].keywords[0]))}
+                onClick={() => {
+                  setSelectedAbilityList(
+                    armyList.army,
+                    removeMarkup(gimicks[0].keywords[0]),
+                    gimicks,
+                  );
+                }}
+              >
+                {removeMarkup(gimicks[0].keywords[0])}
+              </button>
+            )}
           </div>
           {armyList.spellLore && (
             <div>
@@ -127,7 +156,7 @@ export const ArmyImporter: FC = () => {
                 <div key={u}>
                   <button
                     className={isActive(u)}
-                    onClick={() => handleClickUnit(u, undefined, true)}
+                    onClick={() => handleClickUnit(u, undefined)}
                   >
                     • {u}
                   </button>

@@ -208,6 +208,7 @@
   color: #fff;
   font-size: 24 px;
   padding: 3px 5px;
+  padding-right: 30px;
   font-weight: bold;
   display: flex;
 }
@@ -240,6 +241,13 @@
 
 .ws-cost.prayer {
   background-image: url("/src/assets/images/abPrayerPoints.png");
+  color: white;
+  left: 394px;
+  width: 54px;
+}
+
+.ws-cost.blood-tithe {
+  background-image: url("/src/assets/images/abBloodTithePoints11.png");
   color: white;
   left: 394px;
   width: 54px;

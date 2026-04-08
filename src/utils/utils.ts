@@ -47,7 +47,12 @@ export function getNameAndSubtitle(name: string): string[] {
 export function getCostTypeFromKeywords(keywords: string[]): string {
   for (const k of keywords) {
     if (k.includes("Spell")) return "spell";
-    if (k.includes("Prayer")) return "prayer  ";
+    if (k.includes("Prayer")) return "prayer";
+    if (k.includes("Blood Tithe")) return "blood-tithe";
   }
   return "command";
+}
+
+export function removeMarkup(value: string): string {
+  return value.replace(/\*/g, "").replace(/\^/g, "");
 }

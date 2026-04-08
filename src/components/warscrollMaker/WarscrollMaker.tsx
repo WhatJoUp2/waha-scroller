@@ -1,11 +1,15 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, type FC } from "react";
 import { Warscroll } from "../warscroll/Warscroll";
 import { toPng } from "@jpinsonneau/html-to-image";
 import { Controller } from "../controller/Controller";
 import { ArmyContext } from "../../context/ArmyContext";
 import { ArmyImporter } from "../armyImporter/ArmyImporter";
 
-export const WarscrollMaker = () => {
+interface WarscrollMakerProps {
+  onUnload: () => void;
+}
+
+export const WarscrollMaker: FC<WarscrollMakerProps> = ({ onUnload }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { selectedUnit, selectedAbilityList } = useContext(ArmyContext);
 
@@ -27,7 +31,7 @@ export const WarscrollMaker = () => {
   return (
     <div className="content">
       <div className="controller">
-        <Controller onDownloadImage={onDownloadImage} />
+        <Controller onUnload={onUnload} onDownloadImage={onDownloadImage} />
         <ArmyImporter />
       </div>
       <div className="warscroll-container">
